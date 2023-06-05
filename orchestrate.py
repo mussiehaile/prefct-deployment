@@ -5,10 +5,13 @@ import numpy as np
 import scipy
 import sklearn
 from sklearn.feature_extraction import DictVectorizer
+from datetime import date
 from sklearn.metrics import mean_squared_error
 import mlflow
 import xgboost as xgb
 from prefect import flow, task
+from prefect.artifacts import create_markdown_artifact
+
 
 from prefect.filesystems import GitHub
 
@@ -110,6 +113,24 @@ def train_best_model(
         mlflow.log_artifact("models/preprocessor.b", artifact_path="preprocessor")
 
         mlflow.xgboost.log_model(booster, artifact_path="models_mlflow")
+
+
+        markdown__rmse_report = f"""# RMSE Report
+
+        ## Summary
+
+        Duration Prediction 
+
+        ## RMSE XGBoost Model
+
+        | Region    | RMSE |
+        |:----------|-------:|
+        | {date.today()} | {rmse:.2f} |
+        """
+
+        create_markdown_artifact(
+            key="duration-model-report", markdown=markdown__rmse_report
+        )
     return None
 
 
