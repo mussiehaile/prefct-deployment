@@ -1,9 +1,9 @@
 ###
 ### A complete description of a Prefect Deployment for flow 'main-flow'
 ###
-name: test-demo-github
+name: deploy-with-artifact
 description: The main training pipeline
-version: 3406783fec1e1b897f404a5230caff76
+version: 92519d9bc67014c952f604adb6a15ca1
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 work_pool_name: null
@@ -46,14 +46,14 @@ parameter_openapi_schema:
   properties:
     train_path:
       title: train_path
-      default: ./data/green_tripdata_2023-01.parquet
+      default: ./data/ar/green_tripdata_2023-02.parquet
       position: 0
       type: string
     val_path:
       title: val_path
-      default: ./data/green_tripdata_2023-02.parquet
+      default: ./data/ar/green_tripdata_2023-03.parquet
       position: 1
       type: string
   required: null
   definitions: null
-timestamp: '2023-06-05T18:36:46.761669+00:00'
+timestamp: '2023-06-05T19:56:58.680283+00:00'
